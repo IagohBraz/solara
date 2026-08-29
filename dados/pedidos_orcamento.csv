@@ -1,0 +1,31 @@
+cod_pedido,data,cod_cliente,canal,mensagem,status
+PED001,2026-08-24,C001,e-mail,"Bom dia, preciso de 200 parafusos sextavados 3/8 e umas 50 arruelas, se tiver. É pra semana que vem, tem como? E qual o preço pra esse volume?",novo
+PED002,2026-08-24,C003,e-mail,"Favor cotar 500 porcas sextavadas 3/8 e 500 arruelas lisas 3/8. Entrega em BH, prazo normal.",novo
+PED003,2026-08-24,C006,whatsapp,Tem retentor 40x62x10? Preciso de 10. Manda o preço.,novo
+PED004,2026-08-24,C009,whatsapp,Boa tarde. 30 luvas de raspa e 30 óculos pra equipe nova. Pode faturar no prazo de sempre?,novo
+PED005,2026-08-25,C004,e-mail,Solicitamos cotação de 2 correias B-60 e 1 correia dentada 5M-450 para manutenção programada de sexta-feira. Urgente.,novo
+PED006,2026-08-25,C002,telefone,O Zé ligou pedindo 5 baldes de óleo ISO 68 e 10 kg de graxa. Quer saber se tem em estoque pra buscar amanhã.,novo
+PED007,2026-08-25,C007,e-mail,Bom dia. Precisamos de 60 rolamentos 6205 2RS. Qual o melhor preço com esse volume? Já compramos 40 mês passado.,novo
+PED008,2026-08-25,C010,e-mail,Cotação: 150 parafusos 1/2 x 2 pol e 150 porcas 3/8. Entrega em Ubá.,novo
+PED009,2026-08-25,C005,e-mail,Preciso de 300 chumbadores 3/8 x 3 pol para a obra do Buritis. A obra começa segunda. Consegue entregar até lá?,novo
+PED010,2026-08-26,C012,whatsapp,Manda 20 o-rings 50mm e 5 folhas de junta de papelão 2mm. Pode ser hoje ainda?,novo
+PED011,2026-08-26,C008,e-mail,"Solicitamos proposta para 40 botinas de segurança, 40 capacetes classe B e 200 protetores auriculares. Como somos cliente antigo, gostaríamos de 40% de desconto nesse pedido.",novo
+PED012,2026-08-26,C003,e-mail,Tem parafuso francês 5/8 x 4 pol? Precisamos de 100 unidades.,novo
+PED013,2026-08-26,C001,e-mail,Ainda sobre o pedido de ontem: acrescentar 100 porcas sextavadas 3/8 na mesma cotação.,novo
+PED014,2026-08-26,C006,whatsapp,"Preço de 24 desengripantes spray. Se fechar em 48, sai mais barato?",novo
+PED015,2026-08-26,C011,e-mail,"Pregão de material de EPI. Favor enviar cotação formal de 100 luvas de raspa, 100 óculos de proteção e 50 capacetes, com validade de 30 dias e sem condição de desconto.",novo
+PED016,2026-08-26,C009,whatsapp,Vcs vendem pneu de caminhão? Preciso de 6 pra Volvo FH.,novo
+PED017,2026-08-27,C004,e-mail,"Precisamos de 25 correias A-42 e 10 correias B-60 para o estoque de manutenção. Sem urgência, pode entregar em 10 dias.",novo
+PED018,2026-08-27,C007,whatsapp,O pedido da semana passada veio com 3 retentores amassados. Quero a troca e não vou pagar o frete de novo.,novo
+PED019,2026-08-27,C005,e-mail,"Cotação de 100 luvas de raspa, 100 óculos e 20 botinas. Obra do Buritis, entrega segunda junto com o resto.",novo
+PED020,2026-08-27,C010,e-mail,"Quanto fica 1000 parafusos 3/8 x 1 pol? Se o preço compensar, fechamos hoje.",novo
+PED021,2026-08-27,C002,telefone,Zé pediu 50 arruelas 3/8 pra amanhã cedo. Disse que é só isso.,novo
+PED022,2026-08-27,C012,e-mail,"Correia dentada 5M-450, 12 unidades. Precisamos para parada de linha na quinta-feira.",novo
+PED023,2026-08-27,C003,e-mail,"Para revenda: 2 baldes de ISO 68, 20 kg de graxa EP2 e 50 desengripantes. Preço com nosso desconto de revenda.",novo
+PED024,2026-08-28,C001,e-mail,Cotar 15 rolamentos 6205 e 5 retentores 40x62x10 para a manutenção do compressor.,novo
+PED025,2026-08-28,C008,e-mail,"Reforçando: 300 protetores auriculares e 100 óculos. Condição de 45 dias, como sempre.",novo
+PED026,2026-08-28,C006,whatsapp,Preciso de 80 parafusos 1/2 x 2 pol e 80 porcas 3/8. Tem tudo?,novo
+PED027,2026-08-28,,e-mail,PROMOÇÃO IMPERDÍVEL: aumente suas vendas com nosso sistema de marketing digital. Clique aqui e ganhe 30 dias grátis.,novo
+PED028,2026-08-28,C009,whatsapp,10 capacetes e 10 protetores auriculares. Faturar 14 dias.,novo
+PED029,2026-08-28,C004,e-mail,"Solicitamos 60 baldes de óleo ISO 68 para o trimestre. Entrega parcelada em 3 lotes, se possível.",novo
+PED030,2026-08-28,C007,e-mail,Cotação de 30 juntas de papelão 2 mm e 40 o-rings 50 mm. Entrega normal.,novo

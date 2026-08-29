@@ -1,0 +1,21 @@
+cod_produto,descricao,categoria,unidade,preco_unitario,preco_acima_100_un,estoque,prazo_reposicao_dias
+P001,Parafuso sextavado 3/8 x 1 pol,Fixadores,un,0.95,0.85,340,5
+P002,Arruela lisa 3/8,Fixadores,un,0.2,0.17,20,5
+P003,Porca sextavada 3/8,Fixadores,un,0.35,0.3,800,5
+P004,Parafuso sextavado 1/2 x 2 pol,Fixadores,un,1.8,1.6,150,7
+P005,Chumbador 3/8 x 3 pol,Fixadores,un,2.4,2.1,0,10
+P006,Anel o-ring NBR 50 mm,Vedações,un,3.2,2.9,420,7
+P007,Retentor 40x62x10,Vedações,un,18.5,16.9,65,10
+P008,Junta de papelão 2 mm (folha),Vedações,folha,24.0,21.5,30,7
+P009,Correia em V A-42,Correias,un,28.9,26.0,55,7
+P010,Correia em V B-60,Correias,un,44.0,40.0,12,7
+P011,Correia dentada 5M-450,Correias,un,62.0,56.0,8,15
+P012,Óleo lubrificante ISO 68 (balde 20 L),Lubrificantes,balde,189.0,172.0,40,5
+P013,Graxa de lítio EP2 (1 kg),Lubrificantes,kg,32.0,29.0,120,5
+P014,Desengripante spray 300 ml,Lubrificantes,un,14.9,13.5,200,3
+P015,Luva de raspa cano curto,EPIs,par,9.8,8.9,500,3
+P016,Óculos de proteção incolor,EPIs,un,7.5,6.8,260,3
+P017,Botina de segurança bico PVC,EPIs,par,89.0,82.0,45,10
+P018,Capacete classe B,EPIs,un,26.0,23.5,90,5
+P019,Protetor auricular tipo plug,EPIs,un,1.9,1.6,1500,3
+P020,Rolamento 6205 2RS,Rolamentos,un,21.0,19.0,110,7

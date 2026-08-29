@@ -1,0 +1,13 @@
+cod_cliente,nome,cidade,segmento,prazo_pagamento_dias,desconto_maximo_pct,cliente_desde
+C001,Metalúrgica Andrade,Contagem,Indústria,28,5,2016-03-10
+C002,Oficina do Zé,Betim,Oficina,0,0,2019-08-22
+C003,Ferragens Central,Belo Horizonte,Revenda,30,8,2012-01-15
+C004,Usina Vale do Aço,Ipatinga,Indústria,45,10,2010-06-01
+C005,Construtora Horizonte,Belo Horizonte,Construtora,30,5,2021-02-08
+C006,Autopeças Betim,Betim,Revenda,21,5,2015-11-30
+C007,Laticínios Serra Verde,Sete Lagoas,Indústria,28,5,2018-04-17
+C008,Mineração Pedra Alta,Nova Lima,Indústria,45,10,2009-09-09
+C009,Transportadora Rota Minas,Contagem,Transporte,14,3,2022-07-04
+C010,Móveis Lima,Ubá,Indústria,30,5,2017-05-23
+C011,Prefeitura de Betim - Almoxarifado,Betim,Setor público,30,0,2020-10-12
+C012,Cervejaria Alto Cerrado,Betim,Indústria,28,5,2023-01-20
