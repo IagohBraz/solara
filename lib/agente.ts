@@ -78,7 +78,7 @@ export async function agente<TSaida = unknown>(
 
     let saida: TSaida;
     try {
-      saida = JSON.parse(textoResposta) as TSaida;
+      saida = JSON.parse(limparCercasMarkdown(textoResposta)) as TSaida;
     } catch {
       throw new Error(
         `Resposta do agente ${papel} nao e um JSON valido: ${textoResposta}`
@@ -115,6 +115,25 @@ export async function agente<TSaida = unknown>(
       .eq("id", execucaoId);
     throw erro;
   }
+}
+
+// O modelo as vezes "pensa alto" antes do JSON (ex.: o Revisor analisando
+// cada regra) ou embrulha a resposta em cercas markdown, mesmo quando o
+// prompt pede "so JSON". Extrai o JSON de onde ele estiver no texto, em vez
+// de assumir que esta nas pontas.
+function limparCercasMarkdown(texto: string): string {
+  const textoAparado = texto.trim();
+
+  const cerca = textoAparado.match(/```(?:json)?\s*([\s\S]*?)```/i);
+  if (cerca) return cerca[1].trim();
+
+  const inicio = textoAparado.indexOf("{");
+  const fim = textoAparado.lastIndexOf("}");
+  if (inicio !== -1 && fim > inicio) {
+    return textoAparado.slice(inicio, fim + 1);
+  }
+
+  return textoAparado;
 }
 
 function lerPrompt(area: string, papel: Papel): Promise<string> {

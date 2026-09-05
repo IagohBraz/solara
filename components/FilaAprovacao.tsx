@@ -13,6 +13,37 @@ type Aprovacao = {
   status: "pendente" | "aprovada" | "editada" | "rejeitada";
 };
 
+type ItemContexto = {
+  descricao?: string | null;
+  quantidade?: number | null;
+  existe?: boolean;
+};
+
+// A proposta de um pedido de vendas traz "resposta" (o texto pronto para o
+// cliente). Outros tipos de aprovacao (ex.: "nao e orcamento", divergencias
+// do financeiro) nao tem esse campo e caem no editor de JSON generico.
+function obterResposta(proposta: Record<string, unknown>): string | null {
+  return typeof proposta.resposta === "string" ? proposta.resposta : null;
+}
+
+function obterItensNaoVendidos(proposta: Record<string, unknown>): ItemContexto[] {
+  const contexto = proposta.contexto as { itens?: unknown } | undefined;
+  if (!contexto || !Array.isArray(contexto.itens)) return [];
+  return (contexto.itens as ItemContexto[]).filter((item) => item.existe === false);
+}
+
+type HipoteseDivergencia = {
+  hipotese?: string;
+  cod_titulos_envolvidos?: string[];
+  valor_a_baixar?: number;
+  valor_pendente?: number;
+};
+
+function obterHipotese(proposta: Record<string, unknown>): HipoteseDivergencia | null {
+  const hipotese = proposta.hipotese;
+  return hipotese && typeof hipotese === "object" ? (hipotese as HipoteseDivergencia) : null;
+}
+
 export default function FilaAprovacao({
   area,
 }: {
@@ -22,6 +53,7 @@ export default function FilaAprovacao({
   const [itens, setItens] = useState<Aprovacao[]>([]);
   const [selecionado, setSelecionado] = useState<Aprovacao | null>(null);
   const [textoProposta, setTextoProposta] = useState("");
+  const [respostaEditavel, setRespostaEditavel] = useState("");
   const [observacao, setObservacao] = useState("");
   const [erro, setErro] = useState<string | null>(null);
   const [enviando, setEnviando] = useState(false);
@@ -44,6 +76,7 @@ export default function FilaAprovacao({
   function abrir(item: Aprovacao) {
     setSelecionado(item);
     setTextoProposta(JSON.stringify(item.proposta, null, 2));
+    setRespostaEditavel(obterResposta(item.proposta) ?? "");
     setObservacao("");
     setErro(null);
   }
@@ -59,11 +92,15 @@ export default function FilaAprovacao({
 
     let novaProposta = selecionado.proposta;
     if (status === "editada") {
-      try {
-        novaProposta = JSON.parse(textoProposta);
-      } catch {
-        setErro("A proposta editada não é um JSON válido.");
-        return;
+      if (obterResposta(selecionado.proposta) !== null) {
+        novaProposta = { ...selecionado.proposta, resposta: respostaEditavel };
+      } else {
+        try {
+          novaProposta = JSON.parse(textoProposta);
+        } catch {
+          setErro("A proposta editada não é um JSON válido.");
+          return;
+        }
       }
     }
 
@@ -84,13 +121,80 @@ export default function FilaAprovacao({
       })
       .eq("id", selecionado.id);
 
-    setEnviando(false);
-
     if (error) {
+      setEnviando(false);
       setErro(error.message);
       return;
     }
 
+    // A decisão também precisa refletir no item de origem: pedido de vendas
+    // sai de "aguardando_aprovacao" para "respondido" (aprovada/editada) ou
+    // "rejeitado" (rejeitada).
+    if (selecionado.item_tipo === "pedido") {
+      const novoStatusPedido = status === "rejeitada" ? "rejeitado" : "respondido";
+      const { error: erroPedido } = await supabase
+        .from("pedidos_orcamento")
+        .update({ status: novoStatusPedido })
+        .eq("cod_pedido", selecionado.item_id);
+
+      if (erroPedido) {
+        setEnviando(false);
+        setErro(erroPedido.message);
+        return;
+      }
+    }
+
+    // Divergência do financeiro: rejeitar devolve para "nova" (reprocessa
+    // depois); aprovar/editar resolve a divergência e baixa o(s) título(s)
+    // envolvidos com o status que a hipótese indica.
+    if (selecionado.item_tipo === "divergencia") {
+      if (status === "rejeitada") {
+        const { error: erroDivergencia } = await supabase
+          .from("divergencias")
+          .update({ status: "nova" })
+          .eq("id", selecionado.item_id);
+
+        if (erroDivergencia) {
+          setEnviando(false);
+          setErro(erroDivergencia.message);
+          return;
+        }
+      } else {
+        const { error: erroDivergencia } = await supabase
+          .from("divergencias")
+          .update({ status: "resolvida" })
+          .eq("id", selecionado.item_id);
+
+        if (erroDivergencia) {
+          setEnviando(false);
+          setErro(erroDivergencia.message);
+          return;
+        }
+
+        const hipotese = obterHipotese(novaProposta);
+        if (hipotese?.cod_titulos_envolvidos?.length) {
+          const novoStatusTitulo =
+            hipotese.hipotese === "vencido_sem_pagamento"
+              ? "vencido"
+              : (hipotese.valor_pendente ?? 0) > 0.01
+              ? "pago_parcial"
+              : "pago";
+
+          const { error: erroTitulos } = await supabase
+            .from("titulos_receber")
+            .update({ status: novoStatusTitulo })
+            .in("cod_titulo", hipotese.cod_titulos_envolvidos);
+
+          if (erroTitulos) {
+            setEnviando(false);
+            setErro(erroTitulos.message);
+            return;
+          }
+        }
+      }
+    }
+
+    setEnviando(false);
     setSelecionado(null);
     carregar();
   }
@@ -120,14 +224,41 @@ export default function FilaAprovacao({
           <h3>{selecionado.titulo}</h3>
           {erro && <p className="erro">{erro}</p>}
 
-          <label className="campo">
-            <span>Proposta</span>
-            <textarea
-              value={textoProposta}
-              onChange={(e) => setTextoProposta(e.target.value)}
-              rows={12}
-            />
-          </label>
+          {obterResposta(selecionado.proposta) !== null ? (
+            <>
+              {obterItensNaoVendidos(selecionado.proposta).length > 0 && (
+                <div className="fila-aviso">
+                  <strong>Itens que a Solara não vende — confira antes de aprovar:</strong>
+                  <ul>
+                    {obterItensNaoVendidos(selecionado.proposta).map((item, i) => (
+                      <li key={i}>
+                        {item.descricao ?? "item não identificado"}
+                        {item.quantidade ? ` · ${item.quantidade} un pedidas` : ""}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <label className="campo fila-resposta">
+                <span>Resposta para o cliente</span>
+                <textarea
+                  value={respostaEditavel}
+                  onChange={(e) => setRespostaEditavel(e.target.value)}
+                  rows={14}
+                />
+              </label>
+            </>
+          ) : (
+            <label className="campo">
+              <span>Proposta</span>
+              <textarea
+                value={textoProposta}
+                onChange={(e) => setTextoProposta(e.target.value)}
+                rows={12}
+              />
+            </label>
+          )}
 
           <label className="campo">
             <span>Observação (obrigatória ao rejeitar)</span>

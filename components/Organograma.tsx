@@ -47,7 +47,7 @@ export default function Organograma({
 }) {
   const supabase = useMemo(() => createClient(), []);
   const [execucoes, setExecucoes] = useState<Execucao[]>([]);
-  const [alertaRedator, setAlertaRedator] = useState(false);
+  const [agenteEmAlerta, setAgenteEmAlerta] = useState<Agente | null>(null);
 
   useEffect(() => {
     if (!itemId) {
@@ -94,8 +94,8 @@ export default function Organograma({
             linha.status === "ok" &&
             linha.saida?.aprovado === false
           ) {
-            setAlertaRedator(true);
-            setTimeout(() => setAlertaRedator(false), 3000);
+            setAgenteEmAlerta(area === "financeiro" ? "consolidador" : "redator");
+            setTimeout(() => setAgenteEmAlerta(null), 3000);
           }
         }
       )
@@ -111,7 +111,9 @@ export default function Organograma({
     return <div className="organograma organograma--vazio">Selecione um item.</div>;
   }
 
-  const orquestrador = execucoes.find((e) => e.agente === "orquestrador");
+  const orquestrador = [...execucoes]
+    .reverse()
+    .find((e) => e.agente === "orquestrador");
   const agentesArea = AGENTES_POR_AREA[area];
 
   return (
@@ -141,7 +143,7 @@ export default function Organograma({
           const execucao = [...execucoes]
             .reverse()
             .find((e) => e.agente === agenteChave);
-          const alerta = agenteChave === "redator" && alertaRedator;
+          const alerta = agenteChave === agenteEmAlerta;
 
           return (
             <div key={agenteChave} className="organograma-ramo">

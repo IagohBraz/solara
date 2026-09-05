@@ -382,6 +382,32 @@ a.cartao-area:hover {
   font-size: 0.8rem;
 }
 
+.fila-resposta textarea {
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.fila-aviso {
+  background: #fff4e5;
+  border: 1px solid #f0c36d;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+}
+
+.fila-aviso strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: #8a5a00;
+}
+
+.fila-aviso ul {
+  margin: 0.35rem 0 0;
+  padding-left: 1.25rem;
+}
+
 .fila-acoes {
   display: flex;
   gap: 0.75rem;
@@ -391,6 +417,154 @@ a.cartao-area:hover {
 .fila-acoes .botao {
   width: auto;
   padding: 0.55rem 1rem;
+}
+
+/* Vendas */
+
+.pagina-vendas {
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.abas {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid #e2e2e0;
+}
+
+.aba {
+  padding: 0.6rem 1rem;
+  border: none;
+  background: none;
+  font-size: 0.9rem;
+  color: #555;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.aba--ativa {
+  color: #1c1c1c;
+  font-weight: 600;
+  border-bottom-color: #1c1c1c;
+}
+
+.vendas-acoes {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.vendas-acoes .botao {
+  width: auto;
+  padding: 0.6rem 1.2rem;
+}
+
+.formulario-pedido {
+  max-width: 480px;
+  background: #fff;
+  border: 1px solid #e2e2e0;
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.vendas-corpo {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.kanban {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(200px, 1fr));
+  gap: 0.9rem;
+  overflow-x: auto;
+}
+
+.kanban-coluna h3 {
+  font-size: 0.85rem;
+  margin: 0 0 0.6rem;
+  color: #444;
+  display: flex;
+  justify-content: space-between;
+}
+
+.kanban-contagem {
+  color: #999;
+  font-weight: normal;
+}
+
+.kanban-itens {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.kanban-cartao {
+  background: #fff;
+  border: 1px solid #e2e2e0;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.kanban-cartao:hover {
+  border-color: #1c1c1c;
+}
+
+.kanban-cartao--ativo {
+  border-color: #1c1c1c;
+  background: #f0f0ee;
+}
+
+.kanban-cartao-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  color: #555;
+}
+
+.kanban-cartao-canal {
+  color: #777;
+  text-transform: capitalize;
+}
+
+.kanban-cartao p {
+  margin: 0;
+  color: #333;
+}
+
+.kanban-cartao .botao {
+  margin-top: 0.3rem;
+  width: auto;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.8rem;
+}
+
+.painel-lateral {
+  width: 320px;
+  flex-shrink: 0;
+  background: #fff;
+  border: 1px solid #e2e2e0;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.painel-lateral-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.painel-lateral-cabecalho h3 {
+  margin: 0;
+  font-size: 0.95rem;
 }
 
 /* Linha do tempo */
@@ -456,4 +630,126 @@ a.cartao-area:hover {
   font-size: 0.75rem;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+/* Financeiro */
+
+.pagina-financeiro {
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.formulario-importar {
+  max-width: 480px;
+  background: #fff;
+  border: 1px solid #e2e2e0;
+  border-radius: 8px;
+  padding: 1.25rem;
+  gap: 0;
+}
+
+.antes-depois {
+  margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.antes-depois h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.antes-depois pre {
+  margin: 0;
+  background: #fff;
+  border: 1px solid #e2e2e0;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 0.75rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.financeiro-corpo {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.financeiro-principal {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.listas-conciliacao {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.lista-conciliacao h3 {
+  font-size: 0.9rem;
+  margin: 0 0 0.6rem;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.lista-conciliacao-itens {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.item-conciliacao {
+  background: #fff;
+  border: 1px solid #e2e2e0;
+  border-radius: 6px;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.8rem;
+}
+
+.item-conciliacao p {
+  margin: 0.25rem 0 0;
+  color: #333;
+}
+
+.item-conciliacao--ok {
+  border-color: #b6dfc0;
+  background: #eef8f0;
+}
+
+.item-conciliacao-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  color: #555;
+}
+
+.relatorio-financeiro {
+  background: #fff;
+  border: 1px solid #e2e2e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.lista-conciliacao--divergencias .kanban {
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
+}
+
+.relatorio-financeiro pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
